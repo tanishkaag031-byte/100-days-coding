@@ -21,6 +21,7 @@ int main() {
 }
 
 Q42: Write a program to check if a number is a perfect number.
+code:
 #include <stdio.h>
 int main() {
     int num, i, sum = 0;
