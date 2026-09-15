@@ -1,0 +1,62 @@
+Q75: Add two matrices.
+code:
+#include <stdio.h>
+int main() {
+    int rows, cols;
+    printf("Enter number of rows: ");
+    scanf("%d", &rows);
+    printf("Enter number of columns: ");
+    scanf("%d", &cols);
+    int a[rows][cols], b[rows][cols], sum[rows][cols];
+    printf("Enter elements of first matrix:\n");
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            scanf("%d", &a[i][j]);
+        }
+    }
+    printf("Enter elements of second matrix:\n");
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            scanf("%d", &b[i][j]);
+        }
+    }
+    // Add corresponding elements
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            sum[i][j] = a[i][j] + b[i][j];
+        }
+    }
+    printf("Sum of the two matrices:\n");
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            printf("%d ", sum[i][j]);
+        }
+        printf("\n");
+    }
+    return 0;
+}
+
+
+Q76: Check if a matrix is symmetric.
+code:
+#include <stdio.h>
+int main() {
+    int n;
+    printf("Enter size of the matrix (n for n x n): ");
+    scanf("%d", &n);
+    int matrix[n][n];
+    printf("Enter elements of the matrix:\n");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+    int isSymmetric = 1;  // assume true initially
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (matrix[i][j] != matrix[j][i]) {
+                isSymmetric = 0;
+                break;
+            }
+        }
+    }
