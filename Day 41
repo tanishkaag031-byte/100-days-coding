@@ -1,0 +1,30 @@
+Q81: Count characters in a string without using built-in length functions.
+code:
+#include <stdio.h>
+int main() {
+    char str[100];
+    int count = 0;
+    printf("Enter a string: ");
+    scanf("%s", str);
+    // Traverse the string until the null character is found
+    while (str[count] != '\0') {
+        count++;
+    }
+    printf("Length of the string = %d\n", count);
+    return 0;
+}
+
+Q82: Print each character of a string on a new line.
+code:
+#include <stdio.h>
+int main() {
+    char str[100];
+    printf("Enter a string: ");
+    scanf("%s", str);
+    int i = 0;
+    while (str[i] != '\0') {
+        printf("%c\n", str[i]);
+        i++;
+    }
+    return 0;
+}
