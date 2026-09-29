@@ -1,0 +1,77 @@
+Q95: Check if one string is a rotation of another.
+code:
+#include <stdio.h>
+#include <string.h>
+int isSubstring(char *main, char *sub) {
+    int mainLen = strlen(main);
+    int subLen = strlen(sub);
+    for (int i = 0; i <= mainLen - subLen; i++) {
+        int j;
+        for (j = 0; j < subLen; j++) {
+            if (main[i + j] != sub[j]) {
+                break;
+            }
+        }
+        if (j == subLen) {
+            return 1;  // found a full match starting at i
+        }
+    }
+    return 0;
+}
+int main() {
+    char str1[100], str2[100];
+    printf("Enter first string: ");
+    fgets(str1, sizeof(str1), stdin);
+    printf("Enter second string: ");
+    fgets(str2, sizeof(str2), stdin);
+    // Remove trailing newlines from fgets
+    str1[strcspn(str1, "\n")] = '\0';
+    str2[strcspn(str2, "\n")] = '\0';
+    int len1 = strlen(str1);
+    int len2 = strlen(str2);
+    if (len1 != len2) {
+        printf("Not a rotation (different lengths).\n");
+        return 0;
+    }
+    // Concatenate str1 with itself
+    char combined[200];
+    strcpy(combined, str1);
+    strcat(combined, str1);
+    // Check if str2 exists as a substring of combined
+    if (isSubstring(combined, str2)) {
+        printf("The strings ARE rotations of each other.\n");
+    } else {
+        printf("The strings are NOT rotations of each other.\n");
+    }
+    return 0;
+}
+
+Q96: Reverse each word in a sentence without changing the word order.
+code:
+#include <stdio.h>
+#include <string.h>
+int main() {
+    char str[200];
+    printf("Enter a sentence: ");
+    fgets(str, sizeof(str), stdin);
+    // Remove trailing newline
+    str[strcspn(str, "\n")] = '\0';
+    int len = strlen(str);
+    int start = 0;
+    for (int i = 0; i <= len; i++) {
+        // When we hit a space or end of string, reverse the word we just passed
+        if (str[i] == ' ' || str[i] == '\0') {
+            int left = start, right = i - 1;
+            while (left < right) {
+                char temp = str[left];
+                str[left] = str[right];
+                str[right] = temp;
+                left++;
+                right--;
+            }
+            start = i + 1;  // move start to the beginning of the next word
+        }
+    }
+    printf("Sentence with each word reversed: %s\n", str);
+    return 0;
+}
