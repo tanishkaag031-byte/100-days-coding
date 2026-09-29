@@ -1,0 +1,54 @@
+Q91: Remove all vowels from a string.
+code:
+#include <stdio.h>
+int main() {
+    char str[100];
+    char result[100];
+    int j = 0;
+    printf("Enter a string: ");
+    fgets(str, sizeof(str), stdin);
+    for (int i = 0; str[i] != '\0'; i++) {
+        char ch = str[i];
+        // Convert to lowercase just for checking (doesn't affect stored character)
+        char lower = ch;
+        if (lower >= 'A' && lower <= 'Z') {
+            lower = lower + 32;
+        }
+        if (!(lower == 'a' || lower == 'e' || lower == 'i' || lower == 'o' || lower == 'u')) {
+            result[j] = ch;  // keep non-vowel characters (original case preserved)
+            j++;
+        }
+    }
+    result[j] = '\0';  // terminate the new string
+    printf("String after removing vowels: %s\n", result);
+    return 0;
+}
+
+Q92: Find the first repeating lowercase alphabet in a string.
+code:
+#include <stdio.h>
+int main() {
+    char str[100];
+    int count[26] = {0};  // one slot for each lowercase letter a-z
+    printf("Enter a string: ");
+    fgets(str, sizeof(str), stdin);
+    // First pass: count occurrences of each lowercase letter
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] >= 'a' && str[i] <= 'z') {
+            count[str[i] - 'a']++;
+        }
+    }
+    // Second pass: find the first character (in original order) that repeats
+    int found = 0;
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] >= 'a' && str[i] <= 'z' && count[str[i] - 'a'] > 1) {
+            printf("First repeating character: '%c'\n", str[i]);
+            found = 1;
+            break;
+        }
+    }
+    if (!found) {
+        printf("No repeating character found.\n");
+    }
+    return 0;
+}
