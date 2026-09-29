@@ -1,0 +1,75 @@
+Q93: Check if two strings are anagrams of each other.
+code:
+#include <stdio.h>
+#include <string.h>
+int main() {
+    char str1[100], str2[100];
+    int count[26] = {0};
+    printf("Enter first string: ");
+    fgets(str1, sizeof(str1), stdin);
+    printf("Enter second string: ");
+    fgets(str2, sizeof(str2), stdin);
+    int len1 = strlen(str1);
+    int len2 = strlen(str2);
+    // Remove trailing newline captured by fgets, if present
+    if (str1[len1 - 1] == '\n') { str1[len1 - 1] = '\0'; len1--; }
+    if (str2[len2 - 1] == '\n') { str2[len2 - 1] = '\0'; len2--; }
+    if (len1 != len2) {
+        printf("Not anagrams (different lengths).\n");
+        return 0;
+    }
+    // Count characters in first string (increment)
+    for (int i = 0; i < len1; i++) {
+        count[str1[i] - 'a']++;
+    }
+    // Count characters in second string (decrement)
+    for (int i = 0; i < len2; i++) {
+        count[str2[i] - 'a']--;
+    }
+    // If all counts are back to zero, they're anagrams
+    int isAnagram = 1;
+    for (int i = 0; i < 26; i++) {
+        if (count[i] != 0) {
+            isAnagram = 0;
+            break;
+        }
+    }
+    if (isAnagram) {
+        printf("The strings are anagrams.\n");
+    } else {
+        printf("The strings are NOT anagrams.\n");
+    }
+    return 0;
+}
+
+Q94: Find the longest word in a sentence.
+code:
+#include <stdio.h>
+#include <string.h>
+int main() {
+    char str[200];
+    char longest[200] = "";
+    char word[200];
+    int wordIndex = 0;
+    printf("Enter a sentence: ");
+    fgets(str, sizeof(str), stdin);
+    int len = strlen(str);
+    for (int i = 0; i <= len; i++) {
+        // If character is a letter (part of a word), build it up
+        if (str[i] != ' ' && str[i] != '\0' && str[i] != '\n') {
+            word[wordIndex] = str[i];
+            wordIndex++;
+        } else {
+            // End of a word reached
+            word[wordIndex] = '\0';
+
+            if (strlen(word) > strlen(longest)) {
+                strcpy(longest, word);
+            }
+            wordIndex = 0;  // reset for the next word
+        }
+    }
+    printf("Longest word: %s\n", longest);
+    printf("Length: %d\n", (int)strlen(longest));
+    return 0;
+}
