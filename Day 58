@@ -1,0 +1,31 @@
+Q108: Write a Program to take an integer array nums. Print an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i]. The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
+code:
+#include <stdio.h>
+int main() {
+    int n;
+    printf("Enter size of array: ");
+    scanf("%d", &n);
+    int nums[n];
+    printf("Enter %d elements: ", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &nums[i]);
+    }
+    int answer[n];
+    // Step 1: fill answer[i] with product of all elements to the LEFT of i
+    answer[0] = 1;  // nothing to the left of the first element
+    for (int i = 1; i < n; i++) {
+        answer[i] = answer[i - 1] * nums[i - 1];
+    }
+    // Step 2: multiply in the product of all elements to the RIGHT of i
+    int rightProduct = 1;  // nothing to the right of the last element
+    for (int i = n - 1; i >= 0; i--) {
+        answer[i] = answer[i] * rightProduct;
+        rightProduct = rightProduct * nums[i];
+    }
+    printf("Product array: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", answer[i]);
+    }
+    printf("\n");
+    return 0;
+}
